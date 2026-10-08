@@ -2,7 +2,7 @@
 
 [English](README.md) · **简体中文** · [繁體中文](README.zh-TW.md) · [日本語](README.ja.md)
 
-这个开源启动器与部署工具用于在 Linux / Wine / Proton 上启动 Steam 日版 **Heaven Burns Red**（AppID **1973710**）。
+这个开源启动器与部署工具用于在 Linux / Wine / Proton 上启动 Steam 日版 **炽焰天穹 Heaven Burns Red**（AppID **1973710**）。
 
 ## 一键部署
 
