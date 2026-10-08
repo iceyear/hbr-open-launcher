@@ -59,7 +59,7 @@ make package
 
 可通过 `WINCC`、`DLLTOOL`、`HOSTCC` 指定编译器。如果没有静态 libc，可执行 `make HOSTLDFLAGS=`，生成依赖本机 libc 的原生工具。请在兼容系统上使用。打包产物保存在 `dist/`。
 
-GitHub Actions 会构建两个程序、执行 ShellCheck 与合成数据部署测试，并上传工作流产物；不会自动公开发布 Release。
+GitHub Actions 会构建两个程序、执行 ShellCheck 与合成数据部署测试，并上传工作流产物。手动运行工作流时，勾选 **Publish a Release** 即可发布 Release。在 **Release name** 填写发布标题，留空则使用构建编号。工作流会生成 `build-RUN_NUMBER-RUN_ATTEMPT` 格式的 tag，并把打包产物附到 Release。
 
 ## 原理与限制
 

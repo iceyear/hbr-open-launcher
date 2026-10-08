@@ -4,6 +4,17 @@ name: Build and test
   push:
   pull_request:
   workflow_dispatch:
+    inputs:
+      publish_release:
+        description: Publish a Release
+        type: boolean
+        required: true
+        default: false
+      release_name:
+        description: Release name (optional, used when publishing)
+        type: string
+        required: false
+        default: ""
 
 permissions:
   contents: read
@@ -42,3 +53,32 @@ jobs:
             dist/SHA256SUMS
           if-no-files-found: error
           compression-level: 0
+
+  release:
+    name: Publish Release
+    needs: build
+    if: ${{ github.event_name == 'workflow_dispatch' && inputs.publish_release }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    permissions:
+      contents: write
+    steps:
+      - name: Download packages
+        uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8
+        with:
+          name: hbr-open-launcher-linux-x86_64
+          path: dist
+
+      - name: Create Release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          RELEASE_NAME: ${{ inputs.release_name }}
+        run: |
+          tag="build-${GITHUB_RUN_NUMBER}-${GITHUB_RUN_ATTEMPT}"
+          title="${RELEASE_NAME:-HBR Open Launcher build ${GITHUB_RUN_NUMBER}}"
+          gh release create "$tag" dist/* \
+            --repo "$GH_REPO" \
+            --target "$GITHUB_SHA" \
+            --title "$title" \
+            --generate-notes

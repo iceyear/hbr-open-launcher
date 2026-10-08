@@ -59,7 +59,7 @@ make package
 
 `WINCC`, `DLLTOOL`, and `HOSTCC` can select the compilers. If static libc is unavailable, `make HOSTLDFLAGS=` builds the native helper against the host libc; use it on a compatible system. Packaging creates source and binary archives in `dist/`.
 
-GitHub Actions builds both programs, runs ShellCheck and synthetic deployment tests, and uploads the packages as workflow artifacts. It does not publish a release automatically.
+GitHub Actions builds both programs, runs ShellCheck and synthetic deployment tests, and uploads the packages as workflow artifacts. To publish a Release, run the workflow manually and check **Publish a Release**. Enter its title in **Release name**, or leave it blank to use the build number. The workflow generates a tag in the form `build-RUN_NUMBER-RUN_ATTEMPT` and attaches the packages to the Release.
 
 ## How it works
 

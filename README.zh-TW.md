@@ -59,7 +59,7 @@ make package
 
 可透過 `WINCC`、`DLLTOOL`、`HOSTCC` 指定編譯器。若沒有靜態 libc，可執行 `make HOSTLDFLAGS=`，產生依賴本機 libc 的原生工具。請在相容系統上使用。封裝產物儲存在 `dist/`。
 
-GitHub Actions 會建置兩個程式、執行 ShellCheck 與合成資料部署測試，並上傳工作流程產物；不會自動公開發布 Release。
+GitHub Actions 會建置兩個程式、執行 ShellCheck 與合成資料部署測試，並上傳工作流程產物。手動執行工作流程時，勾選 **Publish a Release** 即可發布 Release。在 **Release name** 填寫發布標題，留空則使用建置編號。工作流程會產生 `build-RUN_NUMBER-RUN_ATTEMPT` 格式的 tag，並將封裝產物附加到 Release。
 
 ## 原理與限制
 

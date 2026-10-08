@@ -59,7 +59,7 @@ make package
 
 `WINCC`、`DLLTOOL`、`HOSTCC` でコンパイラーを指定できます。静的 libc がない場合、`make HOSTLDFLAGS=` でホストの libc を利用するツールをビルドできます。互換性のあるシステムで使用してください。パッケージは `dist/` に生成されます。
 
-GitHub Actions は二つのプログラムをビルドし、ShellCheck と合成データによる導入テストを実行して、パッケージをワークフローの成果物としてアップロードします。Release の公開は自動では行いません。
+GitHub Actions は二つのプログラムをビルドし、ShellCheck と合成データによる導入テストを実行して、パッケージをワークフローの成果物としてアップロードします。手動実行時に **Publish a Release** を選択すると Release を公開できます。**Release name** にタイトルを入力してください。空欄の場合はビルド番号を使います。ワークフローは `build-RUN_NUMBER-RUN_ATTEMPT` 形式の tag を生成し、パッケージを Release に添付します。
 
 ## 仕組みと対応範囲
 
