@@ -1,0 +1,44 @@
+name: Build and test
+
+"on":
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - name: Check out source
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          persist-credentials: false
+
+      - name: Install compilers and lint tools
+        run: |
+          sudo apt-get update
+          sudo apt-get install --no-install-recommends -y build-essential gcc-mingw-w64-x86-64 binutils-mingw-w64-x86-64 shellcheck zip
+
+      - name: Check shell scripts
+        run: shellcheck deploy.sh scripts/package.sh tests/run.sh
+
+      - name: Build and run synthetic tests
+        run: make test
+
+      - name: Package source and binaries
+        run: make package
+
+      - name: Upload packages
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7
+        with:
+          name: hbr-open-launcher-linux-x86_64
+          path: |
+            dist/*.tar.gz
+            dist/*.zip
+            dist/SHA256SUMS
+          if-no-files-found: error
+          compression-level: 0

@@ -1,0 +1,5 @@
+LIBRARY "KeRnEl32.dLl"
+EXPORTS
+    GetCommandLineW
+    GetProcAddress
+    LoadLibraryExA

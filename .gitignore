@@ -1,0 +1,12 @@
+/build/
+/dist/
+/.hbr-open-launcher/
+*.exe
+*.dll
+*.dat
+*.i64
+*.idb
+*.log
+*.tmp
+__pycache__/
+.DS_Store
